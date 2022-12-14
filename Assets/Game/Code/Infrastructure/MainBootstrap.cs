@@ -5,10 +5,11 @@ namespace Game.Code.Infrastructure
 	using Game.Code.Input;
 	using UnityEngine;
 
-	public class Bootstrap : MonoBehaviour
+	public class MainBootstrap : MonoBehaviour
 	{
 		[SerializeField] private RootConfig _rootConfig;
 		
+		private ConfigsProvider _configsProvider;
 		private InputManager _inputManager;
 		private TouchControl _touchControl;
 		private KeyboardControl _keyboardControl;
@@ -21,6 +22,9 @@ namespace Game.Code.Infrastructure
 
 		private void Bind()
 		{
+			_configsProvider = new ConfigsProvider( _rootConfig );
+			AllServices.Container.RegisterSingle( _configsProvider );
+			
 			BindInput();
 		}
 
