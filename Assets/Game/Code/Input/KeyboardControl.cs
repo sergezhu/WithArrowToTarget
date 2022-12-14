@@ -1,8 +1,9 @@
 namespace Game.Code.Input
 {
+    using Game.Code.Infrastructure.Services;
     using Game.Input;
 
-    public class KeyboardControl
+    public class KeyboardControl : IService
     {
         private IInputManager _inputManager;
 

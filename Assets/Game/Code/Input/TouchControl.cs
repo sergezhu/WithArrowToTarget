@@ -6,11 +6,12 @@ namespace Game.Code.Input
     using Game.Input;
     using UniRx;
     using System.Threading.Tasks;
+    using Game.Code.Infrastructure.Services;
     using UnityEngine;
     using UnityEngine.InputSystem;
     using UnityEngine.InputSystem.EnhancedTouch;
 
-    public class TouchControl
+    public class TouchControl : IService
     {
         private IInputManager _inputManager;
         private GameplayConfig _gameplayConfig;
