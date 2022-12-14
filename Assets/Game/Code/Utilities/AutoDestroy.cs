@@ -1,9 +1,12 @@
 using UnityEngine;
 
-public class AutoDestroy : MonoBehaviour
+namespace Game.Code.Utilities
 {
-	private void Awake()
+	public class AutoDestroy : MonoBehaviour
 	{
-		Destroy( gameObject );
+		private void Awake()
+		{
+			Destroy( gameObject );
+		}
 	}
 }
