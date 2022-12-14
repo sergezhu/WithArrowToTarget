@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9808ed95190da1e42ac0b4e6283fa521, type: 3}
+  m_Name: Root
+  m_EditorClassIdentifier: 
+  Gameplay: {fileID: 11400000, guid: 737ba838ae50c734284e623d0f53ab5c, type: 2}
+  Hero: {fileID: 11400000, guid: a995012168037df49a0948360c3c5b04, type: 2}
+  Swarm: {fileID: 11400000, guid: 683fe5b36a087eb4a92fa2188275951d, type: 2}
+  FX: {fileID: 11400000, guid: 3ff04d88e9eadc747bbf605b40472c81, type: 2}
+  AdConfig: {fileID: 11400000, guid: 64fa87d2cb1e0a440a63d7e42df83f79, type: 2}
+  AppodealConfig: {fileID: 11400000, guid: 97e15f4feebd5564c9294ab937de527c, type: 2}
+  SaveSettings: {fileID: 11400000, guid: 8dffb8aa37430294db0184aaf4419c43, type: 2}
+  LevelScenes: {fileID: 11400000, guid: 54b30134115696c4d8a8f45000a485a4, type: 2}
+  Editor: {fileID: 11400000, guid: 176036de886a2bd4fbf685c889d32058, type: 2}
