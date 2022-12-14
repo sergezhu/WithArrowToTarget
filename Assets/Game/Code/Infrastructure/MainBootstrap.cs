@@ -1,8 +1,12 @@
 namespace Game.Code.Infrastructure
 {
+	using System;
+	using System.Collections.Generic;
 	using Game.Code.Configs;
+	using Game.Code.Core.Game_Control;
 	using Game.Code.Infrastructure.Services;
 	using Game.Code.Input;
+	using UniRx;
 	using UnityEngine;
 
 	public class MainBootstrap : MonoBehaviour
@@ -13,11 +17,19 @@ namespace Game.Code.Infrastructure
 		private InputManager _inputManager;
 		private TouchControl _touchControl;
 		private KeyboardControl _keyboardControl;
+		private ScenesManager _scenesManager;
+
+		private List<ITickable> _tickables;
+		private CompositeDisposable _disposables;
 
 		private void Awake()
 		{
+			_disposables = new CompositeDisposable();
+			
 			DontDestroyOnLoad( this.gameObject );
 			Bind();
+			RunTickSystem();
+			LoadLevel();
 		}
 
 		private void Bind()
@@ -26,6 +38,10 @@ namespace Game.Code.Infrastructure
 			AllServices.Container.RegisterSingle( _configsProvider );
 			
 			BindInput();
+
+			_scenesManager = new ScenesManager( _rootConfig.LevelScenes );
+			_scenesManager.Initialize();
+			AllServices.Container.RegisterSingle( _scenesManager );
 		}
 
 		private void BindInput()
@@ -40,6 +56,20 @@ namespace Game.Code.Infrastructure
 			_keyboardControl = new KeyboardControl( _inputManager );
 			_keyboardControl.Initialize();
 			AllServices.Container.RegisterSingle( _keyboardControl );
+		}
+
+		private void LoadLevel()
+		{
+			_scenesManager.LoadLevelScene();
+		}
+
+		private void RunTickSystem()
+		{
+			_tickables = new List<ITickable>() { _touchControl };
+
+			Observable.EveryUpdate()
+				.Subscribe( _ => _tickables.ForEach( t => t.Tick( Time.deltaTime ) ) )
+				.AddTo( _disposables );
 		}
 	}
 }

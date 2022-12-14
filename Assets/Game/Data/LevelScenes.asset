@@ -16,13 +16,9 @@ MonoBehaviour:
     m_SceneAsset: {fileID: 102900000, guid: 9fc0d4010bbf28b4594072e72b8655ab, type: 3}
     m_SceneName: Main
   Levels:
-  - m_SceneAsset: {fileID: 0}
+  - m_SceneAsset: {fileID: 102900000, guid: 6c74475b37659ff4cb3e31e1268c84c8, type: 3}
     m_SceneName: Level 1
-  - m_SceneAsset: {fileID: 0}
+  - m_SceneAsset: {fileID: 102900000, guid: 3dc28116f3c494f4a8a312a975c62bd7, type: 3}
     m_SceneName: Level 2
-  - m_SceneAsset: {fileID: 0}
+  - m_SceneAsset: {fileID: 102900000, guid: c6ba8d33fbdfbdd48951e08de0ba4c80, type: 3}
     m_SceneName: Level 3
-  UseOverride: 0
-  OverrideLevel:
-    m_SceneAsset: {fileID: 0}
-    m_SceneName: Level 20

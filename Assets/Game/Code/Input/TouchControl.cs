@@ -6,12 +6,13 @@ namespace Game.Code.Input
     using Game.Input;
     using UniRx;
     using System.Threading.Tasks;
+    using Game.Code.Infrastructure;
     using Game.Code.Infrastructure.Services;
     using UnityEngine;
     using UnityEngine.InputSystem;
     using UnityEngine.InputSystem.EnhancedTouch;
 
-    public class TouchControl : IService
+    public class TouchControl : IService, ITickable
     {
         private IInputManager _inputManager;
         private GameplayConfig _gameplayConfig;
@@ -62,11 +63,13 @@ namespace Game.Code.Input
 
         private void OnTouchPress(InputAction.CallbackContext ctx)
         {
+            Debug.Log( "OnTouchPress" );
             OnStartTouch(ctx);
         }
 
         private void OnTouchRelease(InputAction.CallbackContext ctx)
         {
+            Debug.Log( "OnTouchRelease" );
             OnEndTouch(ctx);
         }
 

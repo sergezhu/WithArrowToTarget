@@ -6,6 +6,7 @@ namespace Game.Code.Configs
 	[CreateAssetMenu( fileName = "Hero", menuName = "Configs/Hero", order = (int)EConfig.Hero )]
 	public class HeroConfig : ScriptableObject
 	{
+		public float ArrowLengthMultiplier = 1f;
 	}
 }
 

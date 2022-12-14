@@ -34,7 +34,7 @@ namespace Game.Code.Hero
 			
 			_dir = dir;
 			var normDir = dir.normalized;
-			var angle = Mathf.Atan2( normDir.x, normDir.y ) * 180f / Mathf.PI; 
+			var angle = Mathf.Atan2( normDir.y, normDir.x ) * 180f / Mathf.PI; 
 			
 			transform.localRotation = Quaternion.Euler( 0, 0, angle );
 		}

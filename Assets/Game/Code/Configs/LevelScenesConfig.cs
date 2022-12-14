@@ -10,12 +10,8 @@
 	{
 		public SceneField StartScene;
 		
-		[Space] // TO DO here was pages disabled
+		[Space] 
 		public List<SceneField> Levels;
-
-		[Space]
-		public bool UseOverride;
-		public SceneField OverrideLevel;
 	}
 }
 

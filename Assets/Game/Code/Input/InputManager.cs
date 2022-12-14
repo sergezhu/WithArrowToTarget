@@ -22,7 +22,8 @@ namespace Game.Code.Input
             
             Touch = _controls.Touch;
             Keyboard = _controls.Keyboard;
+            
+            Touch.Enable();
         }
-
     }
 }

@@ -36,7 +36,7 @@
 
 		private void OnChangeDirection( Vector2 direction )
 		{
-			_view.SetArrowDir( direction );
+			_view.SetArrowDir( direction * _heroConfig.ArrowLengthMultiplier );
 		}
 
 		private void OnIsTouchingChanged(bool isTouch)
