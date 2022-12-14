@@ -8,6 +8,7 @@
 		void SetArrowDir( Vector3 dir );
 		void ShowArrow();
 		void HideArrow();
+		void SetArrowMaxSize(float size);
 	}
 
 	public class HeroView : MonoBehaviour, IHeroView
@@ -21,6 +22,11 @@
 		public void SetPosition( Vector3 position )
 		{
 			Transform.position = position;
+		}
+
+		public void SetArrowMaxSize(float size)
+		{
+			_heroArrow.SetMaxSize( size );
 		}
 
 		public void SetArrowDir( Vector3 dir )

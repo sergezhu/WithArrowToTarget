@@ -19,16 +19,10 @@ namespace Game.Code.Infrastructure
 		private KeyboardControl _keyboardControl;
 		private ScenesManager _scenesManager;
 
-		private List<ITickable> _tickables;
-		private CompositeDisposable _disposables;
-
 		private void Awake()
 		{
-			_disposables = new CompositeDisposable();
-			
 			DontDestroyOnLoad( this.gameObject );
 			Bind();
-			RunTickSystem();
 			LoadLevel();
 		}
 
@@ -61,15 +55,6 @@ namespace Game.Code.Infrastructure
 		private void LoadLevel()
 		{
 			_scenesManager.LoadLevelScene();
-		}
-
-		private void RunTickSystem()
-		{
-			_tickables = new List<ITickable>() { _touchControl };
-
-			Observable.EveryUpdate()
-				.Subscribe( _ => _tickables.ForEach( t => t.Tick( Time.deltaTime ) ) )
-				.AddTo( _disposables );
 		}
 	}
 }

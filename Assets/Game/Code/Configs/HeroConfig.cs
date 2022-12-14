@@ -7,6 +7,7 @@ namespace Game.Code.Configs
 	public class HeroConfig : ScriptableObject
 	{
 		public float ArrowLengthMultiplier = 1f;
+		public float ArrowMaxSize = 1f;
 	}
 }
 

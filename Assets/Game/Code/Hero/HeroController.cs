@@ -25,8 +25,20 @@
 
 		public void Initialize()
 		{
-			_touchControl.IsTouching
-				.Subscribe( v => OnIsTouchingChanged(v) )
+			_view.HideArrow();
+			_view.SetArrowMaxSize( _heroConfig.ArrowMaxSize );
+			_view.SetArrowDir( Vector3.zero );
+			
+			_touchControl.TouchStart
+				.Subscribe( v => _view.ShowArrow() )
+				.AddTo( _disposables );
+
+			_touchControl.TouchEnd
+				.Subscribe( v =>
+				{
+					_view.HideArrow();
+					_view.SetArrowDir( Vector3.zero );
+				} )
 				.AddTo( _disposables );
 
 			_touchControl.DirectionFromStart
@@ -36,15 +48,8 @@
 
 		private void OnChangeDirection( Vector2 direction )
 		{
-			_view.SetArrowDir( direction * _heroConfig.ArrowLengthMultiplier );
-		}
-
-		private void OnIsTouchingChanged(bool isTouch)
-		{
-			if(isTouch)
-				_view.ShowArrow();
-			else
-				_view.HideArrow();
+			Debug.Log( $"{direction}" );
+			_view.SetArrowDir( direction * _heroConfig.ArrowLengthMultiplier / Screen.width );
 		}
 	}
 }

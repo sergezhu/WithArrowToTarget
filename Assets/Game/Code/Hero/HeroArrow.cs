@@ -2,29 +2,27 @@ using UnityEngine;
 
 namespace Game.Code.Hero
 {
-	using System;
 	using Game.Code.Utilities.Extensions;
 
 	public class HeroArrow : MonoBehaviour
 	{
-		[SerializeField] private float _length = 1;
-		[SerializeField] private float _size = 0.5f;
-		[SerializeField] private Vector2 _dir;
-
-		[Space]
 		[SerializeField] private float _offsetFromHero;
 		[SerializeField] private float _arrowOffset;
 		[SerializeField] private Transform _bodyPart;
 		[SerializeField] private Transform _arrowPart;
 
+		private float _length = 1;
+		private Vector2 _dir;
+		private float _maxSize;
+
 		public void SetLength( float length )
 		{
-			SetGeometry( length, _size );
+			SetGeometry( length );
 		}
 
-		public void SetSize( float size )
+		public void SetMaxSize( float size )
 		{
-			SetGeometry( _length, size );
+			_maxSize = size;
 		}
 
 		public void SetDirection( Vector2 dir )
@@ -39,10 +37,10 @@ namespace Game.Code.Hero
 			transform.localRotation = Quaternion.Euler( 0, 0, angle );
 		}
 		
-		public void SetGeometry(float length, float size )
+		private void SetGeometry(float length )
 		{
 			_length = length;
-			_size = size;
+			var size = _maxSize * Mathf.Clamp( length / 1f, 0, 1f );
 			
 			var newBodyPartSize = _bodyPart.localScale.WithX( length ).WithY( size );
 			_bodyPart.localScale = newBodyPartSize;
@@ -63,14 +61,6 @@ namespace Game.Code.Hero
 		public void Hide()
 		{
 			gameObject.SetActive( false );
-		}
-
-		private void OnValidate()
-		{
-			#if UNITY_EDITOR
-			SetGeometry( _length, _size );
-			SetDirection( _dir );
-			#endif
 		}
 	}
 }
