@@ -23,12 +23,13 @@ namespace Game.Code.Input
         }
 
         public ReactiveCommand<Vector2Int> Swipe { get; } = new ReactiveCommand<Vector2Int>();
+        public ReactiveCommand<Vector2> DirectionFromStart { get; } = new ReactiveCommand<Vector2>();
+        public ReactiveProperty<bool> IsTouching { get; } = new ReactiveProperty<bool>();
 
         
         private Controls.TouchActions TouchActions => _inputManager.Touch;
         private Vector2 TouchPosition => TouchActions.TouchPosition.ReadValue<Vector2>();
 
-        private bool _isTouching;
         private bool _waitTouch;
         private Vector2 _startTouchPos;
         private Vector2Int[] _heroDirections;
@@ -48,6 +49,17 @@ namespace Game.Code.Input
             _heroDirections = new[] {Vector2Int.right, Vector2Int.left, Vector2Int.up, Vector2Int.down};
         }
 
+        public void Tick( float deltaTime )
+        {
+            if(!IsTouching.Value)
+                return;
+            
+            var endTouchPos = TouchPosition;
+            var vector = endTouchPos - _startTouchPos;
+
+            DirectionFromStart.Execute( vector );
+        }
+
         private void OnTouchPress(InputAction.CallbackContext ctx)
         {
             OnStartTouch(ctx);
@@ -60,7 +72,7 @@ namespace Game.Code.Input
 
         private void OnPositionChanged(InputAction.CallbackContext ctx)
         {
-            if (_isTouching == false || _waitTouch)
+            if ( !IsTouching.Value || _waitTouch)
                 return;
 
             //Debug.Log( $"changed : time {ctx.time}, {TouchPosition}" );
@@ -68,10 +80,10 @@ namespace Game.Code.Input
 
         private void OnStartTouch(InputAction.CallbackContext ctx)
         {
-            if(_isTouching)
+            if( IsTouching.Value )
                 return;
 
-            _isTouching = true;
+            IsTouching.Value = true;
 
             // New Input System return 0,0 when first time take a value
             // https://forum.unity.com/threads/first-position-of-touch-contact-is-0-0.1039135/
@@ -94,10 +106,10 @@ namespace Game.Code.Input
 
         private void OnEndTouch(InputAction.CallbackContext ctx)
         {
-            if(_isTouching == false)
+            if( IsTouching.Value == false)
                 return;
 
-            _isTouching = false;
+            IsTouching.Value = false;
 
             var endTouchPos = TouchPosition;
             var vector = endTouchPos - _startTouchPos;

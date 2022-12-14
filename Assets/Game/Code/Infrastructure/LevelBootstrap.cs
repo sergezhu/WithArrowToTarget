@@ -23,9 +23,8 @@ namespace Game.Code.Infrastructure
 			var touchControl = AllServices.Container.Single<TouchControl>();
 
 			_heroController = new HeroController( _heroView, rootConfig.Hero, touchControl );
+			_heroController.Initialize();
 			AllServices.Container.RegisterSingle( _heroController );
-			
-			
 		}
 	}
 }
