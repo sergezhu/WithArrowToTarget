@@ -429,6 +429,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _heroArrow: {fileID: 8547139221862744874}
   _heroRenderer: {fileID: 6484602195024548498}
+  CrashMaterial: {fileID: 2100000, guid: 3e0c1ad266b1e0146ba6ea0293c85299, type: 2}
+  FinishMaterial: {fileID: 2100000, guid: fbe8f09a5f5325a468555692be6cad4a, type: 2}
 --- !u!1 &7155629612265374866
 GameObject:
   m_ObjectHideFlags: 0

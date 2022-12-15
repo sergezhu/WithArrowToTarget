@@ -56,7 +56,6 @@
 				.AddTo( _disposables );
 
 			_touchControl.TouchEnd
-				.Where( _ => State.Value == EHeroState.Idle)
 				.Subscribe( v => { OnTouchEnd(); } )
 				.AddTo( _disposables );
 
@@ -80,7 +79,7 @@
 
 		private void OnTouchEnd()
 		{
-			if ( State.Value == EHeroState.Idle )
+			if ( State.Value == EHeroState.Idle && !TouchWhenMoving )
 			{
 				MoveTo( _view.Arrow.EndPosition );
 				_view.HideArrow();
@@ -111,7 +110,7 @@
 						
 						_view.SetCrashedState();
 					}
-					else if ( HasHeroOverlappedFinishZone( _hitColliders ) )
+					else if ( HasHeroOverlappedFinishZone( _hitColliders ) && State.Value != EHeroState.Finished )
 					{
 						State.Value = EHeroState.Finished;
 						_view.SetFinishedState();
@@ -120,7 +119,9 @@
 				.SetEase( Ease.OutQuad )
 				.OnComplete( () =>
 				{
-					State.Value = EHeroState.Idle;
+					if( State.Value == EHeroState.Move )
+						State.Value = EHeroState.Idle;
+					
 					_moveTween = null;
 				} );
 		}

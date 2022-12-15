@@ -22,6 +22,10 @@
 	{
 		[SerializeField] private HeroArrow _heroArrow;
 		[SerializeField] private MeshRenderer _heroRenderer;
+
+		[Space]
+		[SerializeField] private Material CrashMaterial;
+		[SerializeField] private Material FinishMaterial;
 		
 		private Transform _transform;
 
@@ -32,13 +36,13 @@
 		public void SetCrashedState()
 		{
 			Debug.Log( $"<color=red>CRASHED</color>" );
-			_heroRenderer.sharedMaterial.color = Color.red;
+			_heroRenderer.material = CrashMaterial;
 		}
 
 		public void SetFinishedState()
 		{
 			Debug.Log( $"<color=green>FINISHED</color>" );
-			_heroRenderer.sharedMaterial.color = Color.green;
+			_heroRenderer.material = FinishMaterial;
 		}
 
 		public Vector3 Position
