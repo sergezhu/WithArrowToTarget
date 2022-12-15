@@ -14,18 +14,32 @@
 		void SetArrowOverlapState( bool arrowEndOverlap );
 		HeroArrow Arrow { get; }
 		float Size { get; }
+		void SetCrashedState();
+		void SetFinishedState();
 	}
 
 	public class HeroView : MonoBehaviour, IHeroView
 	{
 		[SerializeField] private HeroArrow _heroArrow;
-		[SerializeField] private Collider _heroCollider;
+		[SerializeField] private MeshRenderer _heroRenderer;
 		
 		private Transform _transform;
 
 		public Transform Transform => _transform ??= transform;
 		public HeroArrow Arrow => _heroArrow;
 		public float Size => Mathf.Max( Transform.localScale.x, Transform.lossyScale.y );
+		
+		public void SetCrashedState()
+		{
+			Debug.Log( $"<color=red>CRASHED</color>" );
+			_heroRenderer.sharedMaterial.color = Color.red;
+		}
+
+		public void SetFinishedState()
+		{
+			Debug.Log( $"<color=green>FINISHED</color>" );
+			_heroRenderer.sharedMaterial.color = Color.green;
+		}
 
 		public Vector3 Position
 		{

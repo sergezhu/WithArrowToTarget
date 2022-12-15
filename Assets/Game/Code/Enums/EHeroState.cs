@@ -3,6 +3,8 @@
     public enum EHeroState
     {
         Idle,
-        Move
+        Move,
+        Crashed,
+        Finished
     }
 }
