@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1437507007}
   - component: {fileID: 1437507006}
   - component: {fileID: 1437507005}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _heroView: {fileID: 2187239226369575933}
+  _obstaclesContainer: {fileID: 1651843423595091815}
 --- !u!1 &4854606821888419507
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,7 +193,7 @@ GameObject:
   - component: {fileID: 2966839964714428322}
   - component: {fileID: 6372963783125033332}
   - component: {fileID: 5825110040837525111}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -459,7 +460,7 @@ GameObject:
   - component: {fileID: 6020680979912205730}
   - component: {fileID: 4770763891896916812}
   - component: {fileID: 1620540633149523270}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -556,7 +557,7 @@ GameObject:
   - component: {fileID: 4427020479666549714}
   - component: {fileID: 8765136744332389068}
   - component: {fileID: 2843833381413375419}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

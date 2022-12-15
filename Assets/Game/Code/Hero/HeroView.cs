@@ -9,15 +9,28 @@
 		void ShowArrow();
 		void HideArrow();
 		void SetArrowMaxSize(float size);
+		float GetRadius();
+		void SetArrowOverlapState( bool arrowEndOverlap );
+		HeroArrow Arrow { get; }
 	}
 
 	public class HeroView : MonoBehaviour, IHeroView
 	{
 		[SerializeField] private HeroArrow _heroArrow;
+		[SerializeField] private Collider _heroCollider;
 		
 		private Transform _transform;
 
 		public Transform Transform => _transform ??= transform;
+		public HeroArrow Arrow => _heroArrow;
+
+		public float GetRadius()
+		{
+			var scale = Transform.lossyScale;
+			var radius = 0.5f * Mathf.Max( scale.x, scale.y );
+
+			return radius;
+		}
 		
 		public void SetPosition( Vector3 position )
 		{
@@ -37,7 +50,14 @@
 			_heroArrow.SetDirection( dir );
 		}
 
+		public void SetArrowOverlapState( bool arrowEndOverlap )
+		{
+			_heroArrow.SetOverlapState( arrowEndOverlap );
+		}
+
+
 		public void ShowArrow() => _heroArrow.Show();
+
 		public void HideArrow() => _heroArrow.Hide();
 	}
 }

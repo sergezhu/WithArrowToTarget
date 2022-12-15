@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 9185879728893676756}
   - component: {fileID: 6957194718827182591}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: ar_a0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -208,7 +208,7 @@ GameObject:
   - component: {fileID: 877425974361659827}
   - component: {fileID: 5203607225449726503}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: ar_a1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -338,13 +338,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc08e17ddca5ecd449882611531bb74d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _length: 1
-  _size: 0.5
-  _dir: {x: 1.33, y: 7.2}
   _offsetFromHero: 0
   _arrowOffset: 0.7
   _bodyPart: {fileID: 1259365164072400768}
   _arrowPart: {fileID: 3424495872413278865}
+  _renderers:
+  - {fileID: 5149518824113872708}
+  - {fileID: 9185879728893676756}
+  - {fileID: 877425974361659827}
+  - {fileID: 2987452677710035068}
+  _defaultMaterial: {fileID: 2100000, guid: ef88d08f7f03775478c196c7185b9bb2, type: 2}
+  _overlapMaterial: {fileID: 2100000, guid: ec5da33dd5c58554da8126f5063c7443, type: 2}
 --- !u!1 &6596819950478940265
 GameObject:
   m_ObjectHideFlags: 0
@@ -392,6 +396,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _heroArrow: {fileID: 8547139221862744874}
+  _heroCollider: {fileID: 8509211613017838531}
 --- !u!1 &7155629612265374866
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,7 +410,7 @@ GameObject:
   - component: {fileID: 5149518824113872708}
   - component: {fileID: 716638326500328796}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: ar_body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -551,7 +556,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9d5d1e1def66ae7459b93aee0d8ab9cf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -599,7 +604,7 @@ GameObject:
   - component: {fileID: 2987452677710035068}
   - component: {fileID: 6124664356901221636}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: ar_a2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

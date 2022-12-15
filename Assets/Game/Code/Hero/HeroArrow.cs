@@ -10,10 +10,19 @@ namespace Game.Code.Hero
 		[SerializeField] private float _arrowOffset;
 		[SerializeField] private Transform _bodyPart;
 		[SerializeField] private Transform _arrowPart;
+		[SerializeField] private MeshRenderer[] _renderers;
+
+		[SerializeField] private Material _defaultMaterial;
+		[SerializeField] private Material _overlapMaterial;
 
 		private float _length = 1;
 		private Vector2 _dir;
 		private float _maxSize;
+
+		public Vector3 EndPosition => _arrowPart.position;
+		public Vector3 BodyPosition => _bodyPart.position;
+		public Vector3 BodySize => _bodyPart.localScale;
+		public Quaternion BodyRotation => _bodyPart.rotation;
 
 		public void SetLength( float length )
 		{
@@ -61,6 +70,12 @@ namespace Game.Code.Hero
 		public void Hide()
 		{
 			gameObject.SetActive( false );
+		}
+
+		public void SetOverlapState( bool arrowEndOverlap )
+		{
+			var mat = arrowEndOverlap ? _overlapMaterial : _defaultMaterial;
+			_renderers.ForEach( r=> r.sharedMaterial = mat );
 		}
 	}
 }

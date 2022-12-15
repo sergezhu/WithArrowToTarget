@@ -12,20 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b850160106e4f2f9334fcc5cefe1269, type: 3}
   m_Name: Gameplay
   m_EditorClassIdentifier: 
-  DefaultUIStepsColor: {r: 0.16862746, g: 1, b: 0.2901961, a: 1}
-  StepsTextBounceScale: 1.2
-  StepsTextBounceDuration: 0.25
-  StepsRangeRecords:
-  - MinStepDelta: 0
-    UIStepsColor: {r: 0.9339623, g: 0.77687156, b: 0, a: 1}
-  - MinStepDelta: 2
-    UIStepsColor: {r: 1, g: 0.12156863, b: 0.23529412, a: 1}
+  TouchRelativeDeadZone: 0.05
   TouchZone:
-    _xMin: 0.05
-    _xMax: 0.95
-    _yMin: 0.12
-    _yMax: 0.94
-  ImagesRange: {x: 1, y: 44}
-  HideCellsDelayFactor: 0.6
-  HideCellsDuration: 0.3
-  TextureLoadAttempts: 20
+    _xMin: 0
+    _xMax: 1
+    _yMin: 0
+    _yMax: 1

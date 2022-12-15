@@ -12,10 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e12b943f7fae4c76a2d12f3e300c729e, type: 3}
   m_Name: Hero
   m_EditorClassIdentifier: 
-  CounterUpdateDuration: 1
-  CounterUpdateEase: 1
-  DurationPerCell: 0.3
-  MovingEase: 7
-  RayInDuration: 0.1
-  RayOutDuration: 1
-  TouchRelativeDeadZone: 0.025
+  ArrowLengthMultiplier: 19
+  ArrowMaxSize: 0.3

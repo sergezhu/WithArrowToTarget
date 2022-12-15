@@ -9,6 +9,7 @@ namespace Game.Code.Infrastructure
 	public class LevelBootstrap : MonoBehaviour
 	{
 		[SerializeField] private HeroView _heroView;
+		[SerializeField] private ObstaclesContainer _obstaclesContainer;
 		
 		private HeroController _heroController;
 
@@ -22,7 +23,7 @@ namespace Game.Code.Infrastructure
 			var rootConfig = AllServices.Container.Single<ConfigsProvider>().RootConfig;
 			var touchControl = AllServices.Container.Single<TouchControl>();
 
-			_heroController = new HeroController( _heroView, rootConfig.Hero, touchControl );
+			_heroController = new HeroController( _heroView, rootConfig.Hero, touchControl, _obstaclesContainer );
 			_heroController.Initialize();
 			AllServices.Container.RegisterSingle( _heroController );
 		}
