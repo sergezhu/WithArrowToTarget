@@ -35,7 +35,7 @@ namespace Game.Code.Infrastructure
 			_heroController.Initialize();
 			AllServices.Container.RegisterSingle( _heroController );
 
-			_uiController = new UIController( uiProvider.UIView, _heroController, sceneManager);
+			_uiController = new UIController( uiProvider.UIView, _heroController, sceneManager, touchControl);
 			_uiController.Initialize();
 			AllServices.Container.RegisterSingle( _uiController );
 		}

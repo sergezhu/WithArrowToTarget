@@ -15,7 +15,6 @@ namespace Game.Code.Core.Game_Control
 		private LevelScenesConfig _levelScenesConfig;
 
 		private readonly CompositeDisposable _lifetimeDisposables = new CompositeDisposable();
-		private readonly BoolReactiveProperty _isLevelLoaded = new BoolReactiveProperty();
 
 		public ScenesManager( LevelScenesConfig levelScenesConfig )
 		{
@@ -24,16 +23,6 @@ namespace Game.Code.Core.Game_Control
 		}
 
 		private int LevelNumber { get; set; }
-
-		public IObservable<Unit> LevelLoaded
-		{
-			get
-			{
-				return _isLevelLoaded
-					.Where( v => v )
-					.Select( v => Unit.Default );
-			}
-		}
 
 		public void Initialize()
 		{
@@ -67,7 +56,6 @@ namespace Game.Code.Core.Game_Control
 				.NextFrame()
 				.Subscribe( _ =>
 				{
-					_isLevelLoaded.Value = true;
 					SetActiveScene();
 				} )
 				.AddTo( _lifetimeDisposables );
@@ -75,7 +63,6 @@ namespace Game.Code.Core.Game_Control
 
 		public void UnloadLevelScene()
 		{
-			_isLevelLoaded.Value = false;
 			UnloadScene( GetCurrentLevelSceneName() );
 		}
 

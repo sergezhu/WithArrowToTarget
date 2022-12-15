@@ -5,20 +5,26 @@
 	using Game.Code.Enums;
 	using Game.Code.Hero;
 	using Game.Code.Infrastructure.Services;
+	using Game.Code.Input;
 	using UniRx;
+	using UnityEngine;
 
 	public class UIController : IService
 	{
 		private readonly UIView _view;
 		private readonly HeroController _heroController;
 		private readonly ScenesManager _sceneManager;
+		private readonly TouchControl _touchControl;
 		private readonly CompositeDisposable _disposable;
 
-		public UIController( UIView view, HeroController heroController, ScenesManager sceneManager )
+		private int _openedWindowsCount;
+
+		public UIController( UIView view, HeroController heroController, ScenesManager sceneManager, TouchControl touchControl )
 		{
 			_view = view;
 			_heroController = heroController;
 			_sceneManager = sceneManager;
+			_touchControl = touchControl;
 
 			_disposable = new CompositeDisposable();
 		}
@@ -32,18 +38,26 @@
 				.AddTo( _disposable );
 
 			_view.RestartButtonClick
+				.Subscribe( _ => OnRestartButtonClick() )
+				.AddTo( _disposable );
+
+			_view.NextButtonClick
+				.Subscribe( _ => OnNextButtonClick() )
+				.AddTo( _disposable );
+
+			_view.SomeWindowHidden
 				.Subscribe( _ =>
 				{
-					HideAll();
-					_sceneManager.ReloadLevelScene();
+					_openedWindowsCount = Mathf.Max( 0, _openedWindowsCount - 1 );
+					_touchControl.SetTouchLock( _openedWindowsCount > 0 );
 				} )
 				.AddTo( _disposable );
 
-			_view.RestartButtonClick
+			_view.SomeWindowShown
 				.Subscribe( _ =>
 				{
-					HideAll();
-					_sceneManager.LoadNextLevelScene();
+					_openedWindowsCount += 1;
+					_touchControl.SetTouchLock( _openedWindowsCount > 0 );
 				} )
 				.AddTo( _disposable );
 		}
@@ -63,11 +77,27 @@
 			}
 		}
 
+		private void OnRestartButtonClick()
+		{
+			HideAll();
+			_disposable.Clear();
+			_sceneManager.ReloadLevelScene();
+		}
+		
+		private void OnNextButtonClick()
+		{
+			HideAll();
+			_disposable.Clear();
+			_sceneManager.LoadNextLevelScene();
+		}
+
 		private void HideAll()
 		{
 			_view.HideNoTouchPanel();
 			_view.HideFailWindow();
 			_view.HideWinWindow();
+
+			_openedWindowsCount = 0;
 		}
 	}
 }

@@ -13,6 +13,9 @@
 		public IObservable<Unit> RestartButtonClick { get; private set; }
 		public IObservable<Unit> NextButtonClick { get; private set; }
 
+		public IObservable<Unit> SomeWindowShown { get; private set; }
+		public IObservable<Unit> SomeWindowHidden { get; private set; }
+
 
 		public void ShowFailWindow() => _failWindow.Show();
 		public void HideFailWindow() => _failWindow.Hide();
@@ -25,11 +28,14 @@
 
 		public void Init()
 		{
-			RestartButtonClick = _failWindow.RestartButtonClick;
-			NextButtonClick = _winWindow.NextLevelButtonClick;
-			
 			_failWindow.Init();
 			_winWindow.Init();
+
+			RestartButtonClick = _failWindow.RestartButtonClick;
+			NextButtonClick = _winWindow.NextLevelButtonClick;
+
+			SomeWindowShown = Observable.Merge( _failWindow.Shown, _winWindow.Shown );
+			SomeWindowHidden = Observable.Merge( _failWindow.Hidden, _winWindow.Hidden );
 		}
 	}
 }

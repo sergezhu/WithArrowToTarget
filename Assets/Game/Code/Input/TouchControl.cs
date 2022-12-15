@@ -34,6 +34,7 @@ namespace Game.Code.Input
         private bool _waitTouch;
         private Vector2 _startTouchPos;
         private Vector2Int[] _heroDirections;
+        private bool _locked;
 
         public void Initialize()
         {
@@ -59,7 +60,7 @@ namespace Game.Code.Input
 
         private void OnPositionChanged(InputAction.CallbackContext ctx)
         {
-            if ( !_isTouching || _waitTouch)
+            if ( !_isTouching || _waitTouch || _locked)
                 return;
 
             var endTouchPos = TouchPosition;
@@ -71,7 +72,7 @@ namespace Game.Code.Input
 
         private void OnStartTouch(InputAction.CallbackContext ctx)
         {
-            if( _isTouching )
+            if( _isTouching || _locked)
                 return;
 
             _isTouching = true;
@@ -101,7 +102,7 @@ namespace Game.Code.Input
 
         private void OnEndTouch(InputAction.CallbackContext ctx)
         {
-            if( _isTouching == false)
+            if( _isTouching == false || _locked)
                 return;
 
             _isTouching = false;
@@ -142,6 +143,11 @@ namespace Game.Code.Input
         {
             var deadZone = (Screen.width + Screen.height) * 0.5f * _gameplayConfig.TouchRelativeDeadZone;
             return v.magnitude < deadZone;
+        }
+
+        public void SetTouchLock( bool locked )
+        {
+            _locked = locked;
         }
     }
 }
