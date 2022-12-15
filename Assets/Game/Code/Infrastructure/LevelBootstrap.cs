@@ -18,6 +18,7 @@ namespace Game.Code.Infrastructure
 		
 		private HeroController _heroController;
 		private UIController _uiController;
+		private ObstaclesController _obstaclesController;
 
 		private void Awake()
 		{
@@ -31,7 +32,10 @@ namespace Game.Code.Infrastructure
 			var uiProvider = AllServices.Container.Single<UIProvider>();
 			var sceneManager = AllServices.Container.Single<ScenesManager>();
 
-			_heroController = new HeroController( _heroView, rootConfig.Hero, touchControl, _obstaclesContainer, _finishZone );
+			_obstaclesController = new ObstaclesController( _obstaclesContainer, rootConfig.Gameplay );
+			AllServices.Container.RegisterSingle( _obstaclesController );
+
+			_heroController = new HeroController( _heroView, rootConfig.Hero, touchControl, _obstaclesController, _finishZone );
 			_heroController.Initialize();
 			AllServices.Container.RegisterSingle( _heroController );
 

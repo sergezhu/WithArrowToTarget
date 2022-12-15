@@ -5,8 +5,10 @@ using UnityEngine;
 public class ObstaclesContainer : MonoBehaviour
 {
     [SerializeField] private List<Collider> _colliders;
+    [SerializeField] private List<MeshRenderer> _renderers;
 
     public IEnumerable<Collider> Colliders => _colliders;
+    public IEnumerable<MeshRenderer> Renderers => _renderers;
 
     [ContextMenu("Find Colliders")]
     private void FindColliders()
@@ -15,6 +17,16 @@ public class ObstaclesContainer : MonoBehaviour
 
         #if UNITY_EDITOR
             UnityEditor.EditorUtility.SetDirty( gameObject );
+        #endif
+    }
+
+    [ContextMenu( "Find MeshRenderers" )]
+    private void FindRenderers()
+    {
+        _renderers = transform.GetComponentsInChildren<MeshRenderer>().ToList();
+
+        #if UNITY_EDITOR
+        UnityEditor.EditorUtility.SetDirty( gameObject );
         #endif
     }
 }

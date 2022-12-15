@@ -16,6 +16,7 @@
 		private readonly IHeroView _view;
 		private readonly HeroConfig _heroConfig;
 		private readonly TouchControl _touchControl;
+		private readonly ObstaclesController _obstaclesController;
 		private readonly FinishZone _finishZone;
 		private readonly Collider[] _hitColliders;
 
@@ -31,13 +32,14 @@
 		
 		private bool TouchWhenMoving { get; set; }
 
-		public HeroController( IHeroView view, HeroConfig heroConfig, TouchControl touchControl, ObstaclesContainer obstaclesContainer, FinishZone finishZone )
+		public HeroController( IHeroView view, HeroConfig heroConfig, TouchControl touchControl, ObstaclesController obstaclesController, FinishZone finishZone )
 		{
 			_view = view;
 			_heroConfig = heroConfig;
 			_touchControl = touchControl;
+			_obstaclesController = obstaclesController;
 			_finishZone = finishZone;
-			_hitColliders = new Collider[obstaclesContainer.Colliders.ToArray().Length];
+			_hitColliders = new Collider[obstaclesController.Colliders.ToArray().Length];
 
 			_obstaclesMask = 1 << Layers.Obstacles;
 			_finishZoneMask = 1 << Layers.Finish;
@@ -109,6 +111,7 @@
 						State.Value = EHeroState.Crashed;
 						
 						_view.SetCrashedState();
+						_obstaclesController.SetCrashedState();
 					}
 					else if ( HasHeroOverlappedFinishZone( _hitColliders ) && State.Value != EHeroState.Finished )
 					{

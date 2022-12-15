@@ -1,6 +1,5 @@
 namespace Game.Code.Configs
 {
-	using System;
 	using Game.Code.Enums;
 	using Game.Code.Input;
 	using UnityEngine;
@@ -11,6 +10,9 @@ namespace Game.Code.Configs
 		[Space]
 		public float TouchRelativeDeadZone = 0.05f;
 		public TouchZone TouchZone;
+		
+		[Space]
+		public Material ObstaclesCrashMaterial;
 	}
 }
 

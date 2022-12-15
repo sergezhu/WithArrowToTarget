@@ -18,3 +18,4 @@ MonoBehaviour:
     _xMax: 1
     _yMin: 0
     _yMax: 1
+  ObstaclesCrashMaterial: {fileID: 2100000, guid: 0133663653072a748936001d83b653ca, type: 2}

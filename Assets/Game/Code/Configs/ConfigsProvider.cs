@@ -4,7 +4,7 @@
 
 	public class ConfigsProvider : IService
 	{
-		public RootConfig RootConfig { get; private set; }
+		public RootConfig RootConfig { get; }
 
 		public ConfigsProvider( RootConfig rootConfig )
 		{
