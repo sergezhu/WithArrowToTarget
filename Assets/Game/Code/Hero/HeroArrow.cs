@@ -9,6 +9,7 @@ namespace Game.Code.Hero
 		[SerializeField] private float _offsetFromHero;
 		[SerializeField] private float _arrowOffset;
 		[SerializeField] private Transform _bodyPart;
+		[SerializeField] private Transform _bodyCenter;
 		[SerializeField] private Transform _arrowPart;
 		[SerializeField] private MeshRenderer[] _renderers;
 
@@ -18,11 +19,13 @@ namespace Game.Code.Hero
 		private float _length = 1;
 		private Vector2 _dir;
 		private float _maxSize;
+		private Transform _transform;
 
 		public Vector3 EndPosition => _arrowPart.position;
-		public Vector3 BodyPosition => _bodyPart.position;
+		public Vector3 BodyCenter => _bodyCenter.position;
+		public Vector3 BodyLocalCenter => _bodyPart.localPosition + 0.5f * BodySize.x * Vector3.right;
 		public Vector3 BodySize => _bodyPart.localScale;
-		public Quaternion BodyRotation => _bodyPart.rotation;
+		public Transform Transform => _transform ??= transform;
 
 		public void SetLength( float length )
 		{
