@@ -1,23 +1,24 @@
 namespace Game.Code.Infrastructure
 {
-	using System;
-	using System.Collections.Generic;
 	using Game.Code.Configs;
 	using Game.Code.Core.Game_Control;
 	using Game.Code.Infrastructure.Services;
 	using Game.Code.Input;
-	using UniRx;
+	using Game.Code.UI;
 	using UnityEngine;
 
 	public class MainBootstrap : MonoBehaviour
 	{
 		[SerializeField] private RootConfig _rootConfig;
+		[SerializeField] private UIView _uiView;
 		
 		private ConfigsProvider _configsProvider;
 		private InputManager _inputManager;
 		private TouchControl _touchControl;
 		private KeyboardControl _keyboardControl;
 		private ScenesManager _scenesManager;
+		private UIController _uiController;
+		private UIProvider _uiProvider;
 
 		private void Awake()
 		{
@@ -36,6 +37,11 @@ namespace Game.Code.Infrastructure
 			_scenesManager = new ScenesManager( _rootConfig.LevelScenes );
 			_scenesManager.Initialize();
 			AllServices.Container.RegisterSingle( _scenesManager );
+
+			_uiView.Init();
+
+			_uiProvider = new UIProvider( _uiView );
+			AllServices.Container.RegisterSingle( _uiProvider );
 		}
 
 		private void BindInput()
